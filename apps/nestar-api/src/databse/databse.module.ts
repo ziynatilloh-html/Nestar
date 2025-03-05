@@ -1,4 +1,22 @@
 import { Module } from '@nestjs/common';
-
-@Module({})
-export class DatabseModule {}
+import { InjectConnection, MongooseModule } from '@nestjs/mongoose';
+import { Connection } from 'mongoose';
+@Module({
+	imports: [
+		MongooseModule.forRootAsync({
+			useFactory: () => ({
+				uri: process.env.NODE_ENV === 'production' ? process.env.MONGO_PROD : process.env.MONGO_DEV,
+			}),
+		}),
+	],
+	exports: [MongooseModule],
+})
+export class DatabseModule {
+	constructor(@InjectConnection() private readonly connection: Connection) {
+		if (connection.readyState === 1) {
+			console.log(`MongoDB connected into ${process.env.NODE_ENV === 'production' ? 'production' : 'development'} DB`);
+		} else {
+			console.log('MongoDb connection failed');
+		}
+	}
+}
