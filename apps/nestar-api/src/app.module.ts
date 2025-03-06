@@ -11,7 +11,12 @@ import { DatabseModule } from './databse/databse.module';
 @Module({
 	imports: [
 		ConfigModule.forRoot(),
-		GraphQLModule.forRoot({ driver: ApolloDriver, playground: true, uploads: false, autoSchemaFile: true }),
+		GraphQLModule.forRoot({
+			driver: ApolloDriver,
+			playground: true,
+			uploads: false,
+			autoSchemaFile: true,
+		}),
 		ComponentsModule,
 		DatabseModule,
 	],
