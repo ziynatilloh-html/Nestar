@@ -54,16 +54,18 @@ const MemberSchema = new Schema(
 			default: 0,
 		},
 		memberArticles: {
-			type: String,
-			default: '',
+			type: Number,
+			default: 0,
 		},
 
 		memberFollowers: {
-			type: String,
+			type: Number,
+			default: 0,
 		},
 
 		memberFollowings: {
-			type: String,
+			type: Number,
+			default: 0,
 		},
 
 		memberPoints: {
@@ -71,15 +73,17 @@ const MemberSchema = new Schema(
 			default: 0,
 		},
 		memberLikes: {
-			type: String,
+			type: Number,
+			default: 0,
 		},
 		memberViews: {
-			type: String,
-			default: '',
+			type: Number,
+			default: 0,
 		},
 
 		memberComments: {
-			type: String,
+			type: Number,
+			default: 0,
 		},
 
 		memberRank: {
