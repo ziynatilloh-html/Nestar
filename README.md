@@ -24,3 +24,5 @@
 ## try catch
 
 --to prevent errors to be shown to client side and make them in our pro-ready erorrs to catch the error exactly
+
+## login=>mutation graphql Api=> parametri and type
