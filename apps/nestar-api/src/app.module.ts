@@ -7,6 +7,7 @@ import { ApolloDriver } from '@nestjs/apollo';
 import { AppResolver } from './app.resolver';
 import { ComponentsModule } from './components/components.module';
 import { DatabseModule } from './databse/databse.module';
+import { T } from './libs/types/common';
 
 @Module({
 	imports: [
@@ -16,6 +17,15 @@ import { DatabseModule } from './databse/databse.module';
 			playground: true,
 			uploads: false,
 			autoSchemaFile: true,
+			formatError: (error: T) => {
+				const grapQLFormattedError = {
+					code: error?.extensions.code,
+					message:
+						error?.extensions?.exception?.response?.message || error?.extensions?.response?.message || error?.message,
+				};
+				console.log('grapQl', grapQLFormattedError);
+				return grapQLFormattedError;
+			},
 		}),
 		ComponentsModule,
 		DatabseModule,
