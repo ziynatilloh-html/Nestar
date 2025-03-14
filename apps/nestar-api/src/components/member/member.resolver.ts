@@ -46,6 +46,13 @@ export class MemberResolver {
 		console.log('Query: getMember');
 		return this.memberService.getMember();
 	}
+	@UseGuards(AuthGuard)
+	@Query(() => String)
+	public async checkAuth(@AuthMember('memberNick') memberNick: string): Promise<string> {
+		console.log('Query => checkauth');
+		console.log('memberNick:', memberNick);
+		return `Hi ${memberNick}`;
+	}
 	@Roles(MemberType.USER, MemberType.AGENT)
 	@UseGuards(RolesGuard)
 	@Query(() => String)
