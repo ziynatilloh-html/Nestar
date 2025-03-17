@@ -11,6 +11,7 @@ import { MemberType } from '../../libs/enums/member.enum';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { MemberUpdate } from '../../libs/dto/member/member.update';
 import { shapeIntoMongoObjectId } from '../../libs/config';
+import { WithoutGuard } from '../auth/guards/without.guard';
 
 @Resolver()
 export class MemberResolver {
@@ -36,6 +37,7 @@ export class MemberResolver {
 			throw new InternalServerErrorException(err);
 		}
 	}
+
 	@UseGuards(AuthGuard)
 	@Query(() => String)
 	public async checkAuth(@AuthMember('memberNick') memberNick: string): Promise<string> {
@@ -43,6 +45,7 @@ export class MemberResolver {
 		console.log('memberNick:', memberNick);
 		return `Hi ${memberNick}`;
 	}
+
 	@Roles(MemberType.USER, MemberType.AGENT)
 	@UseGuards(RolesGuard)
 	@Query(() => String)
@@ -50,6 +53,7 @@ export class MemberResolver {
 		console.log('Query: checkAuthRoles');
 		return `Hi ${authMember.memberNick}, you are ${authMember.memberType} (memberId: ${authMember._id})`;
 	}
+
 	@UseGuards(AuthGuard)
 	@Mutation(() => Member)
 	public async updateMember(
@@ -60,11 +64,12 @@ export class MemberResolver {
 		delete input._id;
 		return this.memberService.updateMember(memberId, input);
 	}
+	@UseGuards(WithoutGuard)
 	@Query(() => Member)
-	public async getMember(@Args('memberId') input: string): Promise<Member> {
+	public async getMember(@Args('memberId') input: string, @AuthMember('_id') memberId: ObjectId): Promise<Member> {
 		console.log('Query: getMember');
 		const targetId = shapeIntoMongoObjectId(input);
-		return this.memberService.getMember(targetId);
+		return this.memberService.getMember(memberId, targetId);
 	}
 	/** ADMIN **/
 
