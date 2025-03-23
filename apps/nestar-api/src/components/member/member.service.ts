@@ -10,7 +10,6 @@ import { MemberUpdate } from '../../libs/dto/member/member.update';
 import { StatisticModifier, T } from '../../libs/types/common';
 import { ViewService } from '../view/view.service';
 import { ViewGroup } from '../../libs/enums/view.enum';
-import { internalExecuteOperation } from '@apollo/server/dist/esm/ApolloServer';
 
 @Injectable()
 export class MemberService {
@@ -65,7 +64,7 @@ export class MemberService {
 
 		return result;
 	}
-	public async getMember(memberId: ObjectId, targetId: ObjectId): Promise<Member> {
+	public async getMember(memberId: ObjectId | null, targetId: ObjectId): Promise<Member> {
 		const search: T = {
 			_id: targetId,
 			memberStatus: {

@@ -1,3 +1,4 @@
+import { Member } from './../member/member';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { ObjectId } from 'mongoose';
 
@@ -74,4 +75,7 @@ export class Property {
 
 	@Field(() => Date)
 	updatedAt: Date;
+
+	@Field(() => Member, { nullable: true })
+	memberData?: Member;
 }
