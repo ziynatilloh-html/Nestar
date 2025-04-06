@@ -8,6 +8,7 @@ import { AppResolver } from './app.resolver';
 import { ComponentsModule } from './components/components.module';
 import { DatabseModule } from './databse/databse.module';
 import { T } from './libs/types/common';
+import { SocketModule } from './socket/socket.module';
 
 @Module({
 	imports: [
@@ -29,6 +30,7 @@ import { T } from './libs/types/common';
 		}),
 		ComponentsModule,
 		DatabseModule,
+		SocketModule,
 	],
 	controllers: [AppController],
 	providers: [AppService, AppResolver],
