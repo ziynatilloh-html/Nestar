@@ -6,7 +6,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver } from '@nestjs/apollo';
 import { AppResolver } from './app.resolver';
 import { ComponentsModule } from './components/components.module';
-import { DatabseModule } from './databse/databse.module';
+import { DatabaseModule } from './database/database.module';
 import { T } from './libs/types/common';
 import { SocketModule } from './socket/socket.module';
 
@@ -19,18 +19,18 @@ import { SocketModule } from './socket/socket.module';
 			uploads: false,
 			autoSchemaFile: true,
 			formatError: (error: T) => {
-				const grapQLFormattedError = {
+				const graphQLFormattedError = {
 					code: error?.extensions.code,
 					message:
 						error?.extensions?.exception?.response?.message || error?.extensions?.response?.message || error?.message,
 				};
-				console.log('grapQl', grapQLFormattedError);
-				return grapQLFormattedError;
+				console.log('GRAPHQL GLOBAL ERR:', graphQLFormattedError);
+				return graphQLFormattedError;
 			},
 		}),
-		ComponentsModule,
-		DatabseModule,
-		SocketModule,
+		ComponentsModule, // http connection
+		DatabaseModule,
+		SocketModule, // tcp connection
 	],
 	controllers: [AppController],
 	providers: [AppService, AppResolver],

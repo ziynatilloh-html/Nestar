@@ -1,5 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional, Length } from 'class-validator';
+import { MemberAuthType, MemberType } from '../../enums/member.enum';
 import { ViewGroup } from '../../enums/view.enum';
 import { ObjectId } from 'mongoose';
 

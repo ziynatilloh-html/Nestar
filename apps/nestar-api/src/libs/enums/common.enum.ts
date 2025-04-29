@@ -8,7 +8,8 @@ export enum Message {
 	REMOVE_FAILED = 'Remove failed!',
 	UPLOAD_FAILED = 'Upload failed!',
 	BAD_REQUEST = 'Bad Request',
-	USED_MEMBERNICK_OR_PHONE = 'Already used member nick or phone, please try again',
+
+	USED_MEMBER_NICK_OR_PHONE = 'Already used member nick or phone!',
 	NO_MEMBER_NICK = 'No member with that member nick!',
 	BLOCKED_USER = 'You have been blocked!',
 	WRONG_PASSWORD = 'Wrong password, try again!',
@@ -19,9 +20,9 @@ export enum Message {
 	PROVIDE_ALLOWED_FORMAT = 'Please provide jpg, jpeg or png images!',
 	SELF_SUBSCRIPTION_DENIED = 'Self subscription is denied!',
 }
+
 export enum Direction {
 	ASC = 1,
 	DESC = -1,
 }
-
 registerEnumType(Direction, { name: 'Direction' });

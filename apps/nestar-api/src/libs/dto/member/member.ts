@@ -24,7 +24,7 @@ export class Member {
 	@Field(() => String)
 	memberNick: string;
 
-	memberPassword: string;
+	memberPassword?: string;
 
 	@Field(() => String, { nullable: true })
 	memberFullName?: string;
@@ -57,9 +57,6 @@ export class Member {
 	memberLikes: number;
 
 	@Field(() => Int)
-	memberViews: number;
-
-	@Field(() => Int)
 	memberComments: number;
 
 	@Field(() => Int)
@@ -67,6 +64,9 @@ export class Member {
 
 	@Field(() => Int)
 	memberWarnings: number;
+
+	@Field(() => Int)
+	memberViews: number;
 
 	@Field(() => Int)
 	memberBlocks: number;
@@ -83,12 +83,14 @@ export class Member {
 	@Field(() => String, { nullable: true })
 	accessToken?: string;
 
-	/** from aggregation **/
+	/* from aggregation */
 	@Field(() => [MeLiked], { nullable: true })
 	meLiked?: MeLiked[];
+
 	@Field(() => [MeFollowed], { nullable: true })
 	meFollowed?: MeFollowed[];
 }
+
 @ObjectType()
 export class TotalCounter {
 	@Field(() => Int, { nullable: true })

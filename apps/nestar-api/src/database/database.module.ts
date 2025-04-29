@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { InjectConnection, MongooseModule } from '@nestjs/mongoose';
 import { Connection } from 'mongoose';
+
 @Module({
 	imports: [
 		MongooseModule.forRootAsync({
@@ -11,12 +12,14 @@ import { Connection } from 'mongoose';
 	],
 	exports: [MongooseModule],
 })
-export class DatabseModule {
+export class DatabaseModule {
 	constructor(@InjectConnection() private readonly connection: Connection) {
 		if (connection.readyState === 1) {
-			console.log(`MongoDB connected into ${process.env.NODE_ENV === 'production' ? 'production' : 'development'} DB`);
+			console.log(
+				`MongoDB is connected into ${process.env.NODE_ENV === 'production' ? 'production' : 'development'} db`,
+			);
 		} else {
-			console.log('MongoDb connection failed');
+			console.log('DB is not connected!');
 		}
 	}
 }

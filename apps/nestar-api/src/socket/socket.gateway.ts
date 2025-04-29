@@ -8,21 +8,21 @@ export class SocketGateway implements OnGatewayInit {
 	private summaryClient: number = 0;
 
 	public afterInit(server: Server) {
-		this.logger.log(`WebSocket Server Initialized total: ${this.summaryClient}`);
+		this.logger.log(`WebSocket Server Initialized, total: 0`);
 	}
 
 	handleConnection(client: WebSocket, ...args: any[]) {
 		this.summaryClient++;
-		this.logger.log(`== Client connected total: ${this.summaryClient} ==`);
+		this.logger.log(`== Client connected, total: ${this.summaryClient} ==`);
 	}
 
 	handleDisconnect(client: WebSocket) {
 		this.summaryClient--;
-		this.logger.log(`== Client disconnected left total: ${this.summaryClient} ==`);
+		this.logger.log(`Client disconnected, left total: ${this.summaryClient}`);
 	}
 
 	@SubscribeMessage('message')
-	public handleMessage(client: WebSocket, payload: any): string {
+	public handleMessage(client: any, payload: any): string {
 		return 'Hello world!';
 	}
 }

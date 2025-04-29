@@ -32,6 +32,7 @@ export class PropertyInput {
 	@IsNotEmpty()
 	@Field(() => Number)
 	propertySquare: number;
+
 	@IsNotEmpty()
 	@IsInt()
 	@Min(1)
@@ -64,12 +65,21 @@ export class PropertyInput {
 	memberId?: ObjectId;
 
 	@IsOptional()
-	@Field(() => Date, { nullable: true })
-	constructedAt?: Date;
+	@Field(() => Boolean, { nullable: true })
+	constructedAt?: boolean;
 }
 
 @InputType()
 export class PricesRange {
+	@Field(() => Int)
+	start: number;
+
+	@Field(() => Int)
+	end: number;
+}
+
+@InputType()
+export class PeriodsRange {
 	@Field(() => Int)
 	start: number;
 
@@ -86,14 +96,6 @@ export class SquaresRange {
 	end: number;
 }
 
-@InputType()
-export class PeriodsRange {
-	@Field(() => Date)
-	start: Date;
-
-	@Field(() => Date)
-	end: Date;
-}
 @InputType()
 class PISearch {
 	@IsOptional()
@@ -137,6 +139,7 @@ class PISearch {
 	@Field(() => String, { nullable: true })
 	text?: string;
 }
+
 @InputType()
 export class PropertiesInquiry {
 	@IsNotEmpty()
@@ -162,6 +165,7 @@ export class PropertiesInquiry {
 	@Field(() => PISearch)
 	search: PISearch;
 }
+
 @InputType()
 class APISearch {
 	@IsOptional()
@@ -194,6 +198,7 @@ export class AgentPropertiesInquiry {
 	@Field(() => APISearch)
 	search: APISearch;
 }
+
 @InputType()
 class ALPISearch {
 	@IsOptional()
@@ -230,6 +235,7 @@ export class AllPropertiesInquiry {
 	@Field(() => ALPISearch)
 	search: ALPISearch;
 }
+
 @InputType()
 export class OrdinaryInquiry {
 	@IsNotEmpty()

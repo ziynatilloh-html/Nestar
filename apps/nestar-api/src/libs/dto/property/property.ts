@@ -1,8 +1,8 @@
-import { Member, TotalCounter } from './../member/member';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { ObjectId } from 'mongoose';
-
+import { MemberAuthType, MemberStatus, MemberType } from '../../enums/member.enum';
 import { PropertyLocation, PropertyStatus, PropertyType } from '../../enums/property.enum';
+import { Member, TotalCounter } from '../member/member';
 import { MeLiked } from '../like/like';
 
 @ObjectType()
@@ -27,6 +27,7 @@ export class Property {
 
 	@Field(() => Number)
 	propertyPrice: number;
+
 	@Field(() => Number)
 	propertySquare: number;
 
@@ -52,10 +53,11 @@ export class Property {
 	propertyImages: string[];
 
 	@Field(() => String, { nullable: true })
-	propertyDesc?: string;
+	propertyDesc: string;
 
 	@Field(() => Boolean)
 	propertyBarter: boolean;
+
 	@Field(() => Boolean)
 	propertyRent: boolean;
 
@@ -63,13 +65,13 @@ export class Property {
 	memberId: ObjectId;
 
 	@Field(() => Date, { nullable: true })
-	soldAt?: Date;
+	soldAt: Date;
 
 	@Field(() => Date, { nullable: true })
-	deletedAt?: Date;
+	deletedAt: Date;
 
 	@Field(() => Date, { nullable: true })
-	constructedAt?: Date;
+	constructedAt: Date;
 
 	@Field(() => Date)
 	createdAt: Date;
@@ -77,12 +79,15 @@ export class Property {
 	@Field(() => Date)
 	updatedAt: Date;
 
+	/* From aggregation */
+
 	@Field(() => Member, { nullable: true })
 	memberData?: Member;
-	/** from aggregation **/
+
 	@Field(() => [MeLiked], { nullable: true })
-	meLiked?: MeLiked[];
+	meLiked: MeLiked[];
 }
+
 @ObjectType()
 export class Properties {
 	@Field(() => [Property])
