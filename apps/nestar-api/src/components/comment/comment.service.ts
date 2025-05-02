@@ -62,11 +62,11 @@ export class CommentService {
 	}
 
 	public async updateComment(memberId: ObjectId, input: CommentUpdate): Promise<Comment> {
-		const result = await this.commentModel.findOneAndUpdate(
-			{ _id: input._id, memberId: memberId, commentStatus: CommentStatus.ACTIVE },
-			input,
-			{ new: true },
-		);
+		const result = await this.commentModel
+			.findOneAndUpdate({ _id: input._id, memberId: memberId, commentStatus: CommentStatus.ACTIVE }, input, {
+				new: true,
+			})
+			.exec();
 
 		if (!result) throw new InternalServerErrorException(Message.UPDATE_FAILED);
 		return result;
